@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # This script runs inside the container
-CN24_VERSION="3.0.0-SNAPSHOT"
 cd "${0%/*}"
 
 echo "Making target directory"
@@ -14,7 +13,15 @@ shopt -s extglob
 cp -r ../cn24-src/!(distribution) ./
 
 echo "Moving debian control files..."
-cp -r ../cn24-src/distribution/ubuntu-deb/debian debian
+cp -r ../debian debian
+
+DISTRO_CODE=$(lsb_release -c -s)
+echo "Adding changelog info... ($DISTRO_CODE)"
+echo "cn24 ($CN24_VERSION-$PACKAGE_VERSION~$DISTRO_CODE) $DISTRO_CODE; urgency=low" > debian/changelog
+echo "" >> debian/changelog
+echo "  * Change" >> debian/changelog
+echo "" >> debian/changelog
+echo " -- Clemens-Alexander Brust <clemens-alexander.brust@uni-jena.de> $(date -R)" >> debian/changelog
 
 # Create "origin" tarball
 echo "Creating origin tarball..."
