@@ -14,6 +14,7 @@ RUN apt-get update && \
   libpng12-0 \
   libjpeg8 \
   libreadline6-dev \
+  libopencv-dev \
   packaging-dev
 
 RUN mkdir /cn24-pkg-out
