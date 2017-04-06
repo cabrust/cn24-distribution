@@ -9,9 +9,9 @@ RUN apt-get update && \
   ocl-icd-libopencl1 \
   ocl-icd-opencl-dev \
   libclblas-dev \
-  libpng12-dev \
+  libpng-dev \
   libjpeg-dev \
-  libpng12-0 \
+  libpng16-16 \
   libjpeg8 \
   libreadline6-dev \
   libopencv-dev \

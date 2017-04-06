@@ -1,7 +1,7 @@
 Source: cn24-cpu
 Priority: optional
 Maintainer: Clemens-Alexander Brust <clemens-alexander.brust@uni-jena.de>
-Build-Depends: debhelper (>=9), cmake, libpng12-dev, libjpeg-dev, libreadline6-dev
+Build-Depends: debhelper (>=9), cmake, libpng-dev, libjpeg-dev, libreadline6-dev
 Standards-Version: 3.9.6
 Section: libs
 Homepage: https://github.com/cvjena/cn24
@@ -17,5 +17,5 @@ Package: cn24-cpu
 Conflicts: cn24-gpu, cn24-gpu-opencv
 Provides: cn24
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libpng12-0, libjpeg8, readline-common
+Depends: ${shlibs:Depends}, ${misc:Depends}, libpng16-16, libjpeg8, readline-common
 Description: CN24 Deep Learning Framework

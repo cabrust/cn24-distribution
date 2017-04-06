@@ -1,7 +1,7 @@
 Source: cn24-gpu-opencv
 Priority: optional
 Maintainer: Clemens-Alexander Brust <clemens-alexander.brust@uni-jena.de>
-Build-Depends: debhelper (>=9), cmake, opencl-headers, ocl-icd-libopencl1, ocl-icd-opencl-dev, libpng12-dev, libjpeg-dev, libreadline6-dev, libclblas-dev, libopencv-dev
+Build-Depends: debhelper (>=9), cmake, opencl-headers, ocl-icd-libopencl1, ocl-icd-opencl-dev, libpng-dev, libjpeg-dev, libreadline6-dev, libclblas-dev, libopencv-dev
 Standards-Version: 3.9.6
 Section: libs
 Homepage: https://github.com/cvjena/cn24
@@ -17,5 +17,5 @@ Package: cn24-gpu-opencv
 Conflicts: cn24-gpu, cn24-cpu
 Provides: cn24
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ocl-icd-libopencl1, libpng12-0, libjpeg8, readline-common, libclblas2, libopencv-core2.4v5, libopencv-video2.4v5
+Depends: ${shlibs:Depends}, ${misc:Depends}, ocl-icd-libopencl1, libpng16-16, libjpeg8, readline-common, libclblas2, libopencv-core2.4v5, libopencv-video2.4v5
 Description: CN24 Deep Learning Framework, GPU/OpenCL and OpenCV
