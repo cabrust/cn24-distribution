@@ -1,4 +1,10 @@
 #!/bin/sh
+
+if [ "$1" == "--skip" ]; then
+  echo "Skipping tests..."
+  SKIP_TESTS=1
+fi
+
 mkdir -p ../dist-tmp/cpu
 mkdir -p ../dist-tmp/gpu
 mkdir -p ../dist-tmp/gpu-cv
@@ -11,7 +17,9 @@ mkdir -p build-gpu-cv
 cd build-cpu
 cmake -DCN24_BUILD_OPENMP=ON -DCN24_BUILD_PNG=OFF -DJPEG_INCLUDE_DIR=$(pwd)/../libjpeg/include -DJPEG_LIBRARY=$(pwd)/../libjpeg/lib/libjpeg.a -DCMAKE_BUILD_TYPE=Release -G "MSYS Makefiles" ../../../..
 make -j12
-ctest . --rerun-failed
+if [ -z "$SKIP_TESTS" ]; then
+  ctest . --rerun-failed
+fi
 cp -r libcn24.dll libcn24.dll.a cn24-shell.exe ../../dist-tmp/cpu/
 cd ..
 
@@ -22,7 +30,9 @@ cd ../msys
 cd build-gpu
 cmake -DCN24_BUILD_OPENMP=ON -DCN24_BUILD_PNG=OFF -DJPEG_INCLUDE_DIR=$(pwd)/../libjpeg/include -DJPEG_LIBRARY=$(pwd)/../libjpeg/lib/libjpeg.a -DCMAKE_BUILD_TYPE=Release -DCN24_BUILD_OPENCL=ON -G "MSYS Makefiles" -DCN24_BUILD_OPENCL_CLBLAS=ON -DCLBLAS_INCLUDE_DIR=../../packages/clblas/include -DCLBLAS_LIBRARY=../../packages/clblas/bin/clBLAS.dll ../../../..
 make -j12
-PATH=$PATH:../../packages/clblas/bin ctest . --rerun-failed
+if [ -z "$SKIP_TESTS" ]; then
+  PATH=$PATH:../../packages/clblas/bin ctest . --rerun-failed
+fi
 cp -r libcn24.dll libcn24.dll.a cn24-shell.exe ../../dist-tmp/gpu/
 cd ..
 
@@ -33,7 +43,9 @@ cd ../msys
 cd build-gpu-cv
 OpenCV_DIR=../../packages/opencv/build2 cmake -DCN24_BUILD_OPENMP=ON -DCN24_BUILD_PNG=OFF -DJPEG_INCLUDE_DIR=$(pwd)/../libjpeg/include -DJPEG_LIBRARY=$(pwd)/../libjpeg/lib/libjpeg.a -DCMAKE_BUILD_TYPE=Release -DCN24_BUILD_OPENCL=ON -G "MSYS Makefiles" -DCN24_BUILD_OPENCL_CLBLAS=ON -DCLBLAS_INCLUDE_DIR=../../packages/clblas/include -DCLBLAS_LIBRARY=../../packages/clblas/bin/clBLAS.dll -DCN24_BUILD_OPENCV=ON ../../../..
 make -j12
-PATH=$PATH:../../packages/clblas/bin ctest . --rerun-failed
+if [ -z "$SKIP_TESTS" ]; then
+  PATH=$PATH:../../packages/clblas/bin:../../packages/opencv/build2/bin ctest . --rerun-failed
+fi
 cp -r libcn24.dll libcn24.dll.a cn24-shell.exe ../../dist-tmp/gpu-cv/
 cd ..
 
@@ -47,3 +59,4 @@ for fname in $(cat runtime-dlls); do
     echo "Could not find $fname, skipping!"
   fi
 done
+

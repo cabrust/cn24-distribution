@@ -4,7 +4,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "CN24"
-#define MyAppVersion "3.0.0-SNAPSHOT"
+#define MyAppVersion "4.0.0-SNAPSHOT"
 #define MyAppPublisher "Clemens-Alexander Brust"
 #define MyAppURL "https://github.com/cvjena/cn24"
 #define MyAppExeName "cn24-shell.exe"
@@ -41,7 +41,7 @@ Source: "{#SourcePath}..\dist-tmp\cpu\*"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#SourcePath}..\dist-tmp\gpu\*"; DestDir: "{app}"; Flags: ignoreversion; Components: opencl_clblas
 Source: "{#SourcePath}..\dist-tmp\gpu-cv\*"; DestDir: "{app}"; Flags: ignoreversion; Components: opencl_clblas_cv
 Source: "{#SourcePath}..\..\..\include\*"; DestDir: "{app}\include"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: devel_stuff
-Source: "{#SourcePath}..\..\..\kernels\*"; DestDir: "{commonappdata}\CN24\kernels"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: opencl_clblas opencl_clblas_cv
+Source: "{#SourcePath}..\..\..\kernels\*"; DestDir: "{cf}\CN24\kernels"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: opencl_clblas opencl_clblas_cv
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "{#SourcePath}..\packages\clblas\bin\clBLAS.dll"; DestDir: "{app}"; Components: opencl_clblas opencl_clblas_cv
 Source: "{#SourcePath}..\packages\opencv\build2\bin\libopencv_core320.dll"; DestDir: "{app}"; Components: opencl_clblas_cv
