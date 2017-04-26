@@ -7,6 +7,10 @@
   - Install only if you don't have a gpu driver
   - Otherwise, tests will fail!
 
+- Visual C++ 2015 Runtime (x64)
+  - Needed for clBLAS
+  - Otherwise, tests will fail!
+
 - MSYS 2 (using version 20161025)
   - Follow MSYS's installation instructions including running `pacman -Syu` etc.
   - Install the following packages:
