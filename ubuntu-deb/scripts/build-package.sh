@@ -15,17 +15,12 @@ for CN24_CONFIG in $CN24_CONFIGS; do
 
   # Make origin tarball appear
   echo "Building package..."
-  if [ $PACKAGE_VERSION -eq 1 ]; then
-    echo "Creating origin tarball..."
+  echo "Downloading origin tarball..."
+  wget https://launchpad.net/~cn24-team/+archive/ubuntu/ppa/+files/cn24-${CN24_CONFIG}_$CN24_VERSION.orig.tar.gz -P ..
+  if [ ! -e ../cn24-${CN24_CONFIG}_$CN24_VERSION.orig.tar.gz ]; then
+    echo "Could not find original tarball on launchpad, rebuilding..."
+    touch ../cn24-${CN24_CONFIG}_$CN24_VERSION-orig-missing
     tar -cz -f ../cn24-${CN24_CONFIG}_$CN24_VERSION.orig.tar.gz *
-  else
-    echo "Downloading origin tarball..."
-    wget https://launchpad.net/~cn24-team/+archive/ubuntu/ppa/+files/cn24-${CN24_CONFIG}_$CN24_VERSION.orig.tar.gz -P ..
-    if [ ! -e ../cn24-${CN24_CONFIG}_$CN24_VERSION.orig.tar.gz ]; then
-      echo "Could not find original tarball on launchpad, rebuilding..."
-      touch ../cn24-${CN24_CONFIG}_$CN24_VERSION-orig-missing
-      tar -cz -f ../cn24-${CN24_CONFIG}_$CN24_VERSION.orig.tar.gz *
-    fi
   fi
 
   echo "Moving debian control files..."
@@ -50,14 +45,10 @@ for CN24_CONFIG in $CN24_CONFIGS; do
   # Create "origin" tarball
 
   echo "Building package..."
-  if [ $PACKAGE_VERSION -eq 1 ]; then
+  if [ -e ../cn24-${CN24_CONFIG}_$CN24_VERSION-orig-missing ]; then
     debuild -us -uc -j12
   else
-    if [ -e ../cn24-${CN24_CONFIG}_$CN24_VERSION-orig-missing ]; then
-      debuild -us -uc -j12
-    else
-      debuild -sd -us -uc -j12
-    fi
+    debuild -sd -us -uc -j12
   fi
 
   cd ..
@@ -67,14 +58,10 @@ done
 echo "Signing packages..."
 for CN24_CONFIG in $CN24_CONFIGS; do
   cd cn24-$CN24_CONFIG-$CN24_VERSION
-  if [ $PACKAGE_VERSION -eq 1 ]; then
+  if [ -e ../cn24-${CN24_CONFIG}_$CN24_VERSION-orig-missing ]; then
     debuild -S
   else
-    if [ -e ../cn24-${CN24_CONFIG}_$CN24_VERSION-orig-missing ]; then
-      debuild -S
-    else
-      debuild -sd -S
-    fi
+    debuild -sd -S
   fi
   cd ..
 done
