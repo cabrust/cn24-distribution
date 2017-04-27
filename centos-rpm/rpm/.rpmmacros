@@ -1,0 +1,4 @@
+%packager Clemens-Alexander Brust
+%_topdir /root/rpmbuild
+%_tmppath /root/rpmbuild/tmp
+%debug_package %{nil}

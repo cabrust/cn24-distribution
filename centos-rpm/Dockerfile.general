@@ -1,0 +1,42 @@
+MAINTAINER Clemens-Alexander Brust (clemens-alexander.brust@uni-jena.de)
+
+# Install development packages
+RUN yum -y --setopt=tsflags=nodocs update && \
+  yum -y --setopt=tsflags=nodocs install wget epel-release centos-release-scl
+
+RUN yum -y --setopt=tsflags=nodocs update && \
+  yum -y --setopt=tsflags=nodocs clean all
+
+RUN yum -y --setopt=tsflags=nodocs install rpm-build devtoolset-4
+
+RUN yum -y --setopt=tsflags=nodocs install \
+  opencl-headers \
+  cmake3 \
+  git \
+  ocl-icd \
+  ocl-icd-devel \
+  libpng \
+  libpng-devel \
+  libjpeg-turbo \
+  libjpeg-turbo-devel \
+  python-argparse \
+  opencv \
+  opencv-devel
+
+#   apt-get install -y \
+#   git-core \
+#   cmake \
+#   opencl-headers \
+#   ocl-icd-libopencl1 \
+#   ocl-icd-opencl-dev \
+#   libclblas-dev \
+#   libpng-dev \
+#   libjpeg-dev \
+#   libpng16-16 \
+#   libjpeg8 \
+#   libreadline6-dev \
+#   libopencv-dev \
+#   packaging-dev
+
+RUN mkdir /cn24-pkg-out
+COPY scripts/build-package.sh /cn24-pkg-out/build-package.sh
