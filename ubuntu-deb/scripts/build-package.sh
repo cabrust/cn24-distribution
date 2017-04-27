@@ -11,7 +11,7 @@ for CN24_CONFIG in $CN24_CONFIGS; do
 
   # Copy files from repo
   echo "Copying files..."
-  cp -r ../cn24-src/!(distribution|cmake-build-*) ./
+  cp -r ../cn24-src/!(cn24-distribution|cmake-build-*) ./
 
   # Make origin tarball appear
   echo "Building package..."
