@@ -21,7 +21,7 @@ cd ../..
 
 mkdir build
 cd build
-cmake3 -DCN24_BUILD_OPENCL=ON -DCN24_BUILD_OPENCL_CLBLAS=ON -DCMAKE_BUILD_TYPE=Release \
+cmake3 -DCN24_BUILD_OPENCL=ON -DCN24_BUILD_OPENMP=ON -DCN24_BUILD_OPENCL_CLBLAS=ON -DCMAKE_BUILD_TYPE=Release \
 -DCLBLAS_LIBRARY=../clBLAS/prefix/usr/local/lib64/libclBLAS.so -DCLBLAS_INCLUDE_DIR=../clBLAS/prefix/usr/local/include ..
 make -j12
 

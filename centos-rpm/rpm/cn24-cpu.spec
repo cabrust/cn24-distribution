@@ -11,7 +11,7 @@ CN24 Deep Learning Framework (CPU version).
 %build
 mkdir build
 cd build
-cmake3 -DCMAKE_BUILD_TYPE=Release ..
+cmake3 -DCMAKE_BUILD_TYPE=Release -DCN24_BUILD_OPENMP=ON ..
 make -j12
 
 %install
